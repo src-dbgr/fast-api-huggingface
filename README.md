@@ -3,6 +3,8 @@
 
 The following list shows the dependencies I had installed to a conda virual environment
 
+Python Version `3.9.5`
+
 ```
 pip list
 Package                      Version
@@ -139,3 +141,6 @@ wincertstore                 0.2
 wrapt                        1.14.1
 zipp                         3.8.1
 ```
+
+Activate your conda virual environment: `conda activate <your virtual environment`
+Start the server on windows: `start_server.bat` or on linux: `./start_server.sh`
