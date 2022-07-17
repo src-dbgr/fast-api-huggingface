@@ -4,7 +4,7 @@ from typing import Union
 from fastapi import Depends, FastAPI
 from numpy import true_divide
 from pydantic import BaseModel
-from model import Model, get_custom_task, get_custom_task_and_model, get_custom_summarization_and_model
+from model import Model, get_custom_task_and_model, get_summarization_and_model
 
 app = FastAPI()
 
@@ -48,7 +48,7 @@ async def makePrediction(request: Request, custom_model, task):
     print('Applying Task: ' + task)
     print('Applying Model: ' + custom_model)
     if task == 'summarization':
-        model: Model = get_custom_summarization_and_model(task,custom_model)
+        model: Model = get_summarization_and_model(custom_model)
         return model.summarize(request.request_text)
     else:
         model: Model = get_custom_task_and_model(task,custom_model)

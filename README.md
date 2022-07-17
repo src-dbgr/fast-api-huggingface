@@ -144,3 +144,51 @@ zipp                         3.8.1
 
 Activate your conda virual environment: `conda activate <your virtual environment`
 Start the server on windows: `start_server.bat` or on linux: `./start_server.sh`
+
+Example POST request:
+
+Example URL Pattern: `localhost:80000/model/<model-name>/task/<task name>`
+
+URL: `localhost:8000/model/google:::pegasus-xsum/task/summarization`
+
+- NOTE: ":::" is here a replacement for a "/" in the model name
+
+Request Body: 
+```
+{
+    "request_text": "It was one of the engineers, James Liang, who just did what he was told. Of course, it's not all bad—if a project you are involved in turns out to make a huge positive impact on even one person, this is going to make you feel pretty great!, Okay, so hopefully we have convinced you that you ought to care. But what should you do? As data scientists, we're naturally inclined to focus on making our models better by optimizing some metric or other. But optimizing that metric may not actually lead to better outcomes. And even if it *does* help create better outcomes, it almost certainly won't be the only thing that matters. Consider the pipeline of steps that occurs between the development of a model or an algorithm by a researcher or practitioner, and the point at which this work is actually used to make some decision. This entire pipeline needs to be considered *as a whole* if we're to have a hope of getting the kinds of outcomes we want. Normally there is a very long chain from one end to the other. This is especially true if you are a researcher, where you might not even know if your research will ever get used for anything, or if you're involved in data collection, which is even earlier in the pipeline. But no one is better placed to inform everyone involved in this chain about the capabilities, constraints, and details of your work than you are. Although there's no silver bullet that can ensure your work is used the right way, by getting involved in the process, and asking the right questions, you can at the very least ensure that the right issues are being considered., Sometimes, the right response to being asked to do a piece of work is to just say no. Often, however, the response we hear is, If I don’t do it, someone else will. But consider this: if you’ve been picked for the job, you’re the best person they’ve found to do it—so if you don’t do it, the best person isn’t working on that project. If the first five people they ask all say no too, even better!"
+}
+```
+
+Example Result:
+```
+{
+    "summary_text": {
+        "0": "In our series of letters from British journalists, film-maker and columnist James Liang looks at the importance of asking the right questions."
+    }
+}
+```
+
+
+Example Console Log:
+
+```
+(my_conda_virual_env) <mypath>uvicorn main:app
+3.9.5
+INFO:     Started server process [8852]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+Applying Task: summarization
+Applying Model: google/pegasus-xsum
+2022-07-17 19:34:39.100153: I tensorflow/core/platform/cpu_feature_guard.cc:193] This TensorFlow binary is optimized with oneAPI Deep Neural Network Library (oneDNN) to use the following CPU instructions in performance-critical operations:  AVX AVX2
+To enable them in other operations, rebuild TensorFlow with the appropriate compiler flags.
+2022-07-17 19:34:39.502057: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1532] Created device /job:localhost/replica:0/task:0/device:GPU:0 with 13620 MB memory:  -> device: 0, name: NVIDIA GeForce RTX 3080 Laptop GPU, pci bus id: 0000:01:00.0, compute capability: 8.6
+2022-07-17 19:34:43.487991: I tensorflow/stream_executor/cuda/cuda_blas.cc:1786] TensorFloat-32 will be used for the matrix multiplication. This will only be logged once.
+All model checkpoint layers were used when initializing TFPegasusForConditionalGeneration.
+
+All the layers of TFPegasusForConditionalGeneration were initialized from the model checkpoint at google/pegasus-xsum.
+If your task is similar to the task the model of the checkpoint was trained on, you can already use TFPegasusForConditionalGeneration for predictions without further training.
+INFO:     127.0.0.1:52688 - "POST /model/google%3A%3A%3Apegasus-xsum/task/summarization HTTP/1.1" 200 OK
+
+```
