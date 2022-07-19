@@ -1,7 +1,7 @@
 # Quick and Dirty FastAPI Example
 ## Calling Huggingface models by passing request text via HTTP
 
-The following list shows the dependencies I had installed to a conda virual environment
+The following list shows the dependencies I had installed to a conda virtual environment
 
 Python Version `3.9.5`
 
@@ -142,7 +142,7 @@ wrapt                        1.14.1
 zipp                         3.8.1
 ```
 
-Activate your conda virual environment: `conda activate <your virtual environment`
+Activate your conda virual environment: `conda activate <your virtual environment>`
 Start the server on windows: `start_server.bat` or on linux: `./start_server.sh`
 
 Example POST request:
